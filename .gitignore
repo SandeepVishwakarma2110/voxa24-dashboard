@@ -1,0 +1,15 @@
+Build output
+/client/dist
+
+Environment variables
+.env
+
+data.txt
+
+IDE and OS files
+.vscode/
+.DS_Store
+*.log
+
+client/node_modules
+node_modules/
