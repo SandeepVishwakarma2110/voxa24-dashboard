@@ -72,7 +72,7 @@
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Chat from "../pages/chat";
+import Chat from "../pages/Chat.jsx";
 
 export default function Header() {
   const [chatOpen, setChatOpen] = useState(false);
