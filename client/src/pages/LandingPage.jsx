@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa6";
 import Header from "../components/Headers";
@@ -74,11 +74,11 @@ export default function LandingPage() {
     {
       title: "Prediction & Forcasting",
       img: "/LandingPage/section4TotalControl/four.png",
-     points: [
-      "Leverage AI-powered insights to predict customer behavior and demand.",
-      "Make smarter decisions with real-time forecasting and data-driven analytics.",
-      "Anticipate trends and optimize performance before challenges arise.",
-    ],
+      points: [
+        "Leverage AI-powered insights to predict customer behavior and demand.",
+        "Make smarter decisions with real-time forecasting and data-driven analytics.",
+        "Anticipate trends and optimize performance before challenges arise.",
+      ],
     },
   ];
 
@@ -137,9 +137,58 @@ export default function LandingPage() {
       }
     }
   }
+  //const [docAssServerUrl, setDocAssServerUrl] = useState("");
+
+
+  // useEffect(() => {
+  //   fetch("/config")
+
+  //     .then((res) => {
+  //       if (!res.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((text) => {
+  //       try {
+  //         const data = JSON.parse(text);
+  //        if (data.DocAss_server_url) {
+  //         localStorage.setItem("DocAss_server_url", data.DocAss_server_url);
+  //         // console.log("✅ DocAss server URL stored:", data.DocAss_server_url);
+  //       } 
+  //         setDocAssServerUrl(data.DocAss_server_url || "");
+  //         // console.log("Fetched DOC_API_URL from server:", data.DocAss_server_url);
+  //       } catch (e) {
+  //         console.error("Failed to parse JSON from /config:", text);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error("Fetch error for /config:", err);
+  //     });
+  // }, []);
+  useEffect(() => {
+    fetch("/config")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json(); // ✅ FIX
+      })
+      .then((data) => {
+        if (data.DocAss_server_url) {
+          localStorage.setItem("DocAss_server_url", data.DocAss_server_url);
+        }
+        //setDocAssServerUrl(data.DocAss_server_url || "");
+      })
+      .catch((err) => {
+        console.error("Fetch error for /config:", err);
+      });
+  }, []);
+
+
   return (
     <>
-     <Header />
+      <Header />
       <section className=" min-h-screen w-screen flex flex-col sm:flex-row gap-10 justify-center items-center p-6 sm:p-24">
         <div className="absolute inset-0 bg-[url('/LandingPage/section1/bg.png')]  bg-cover bg-center opacity-40 h-full w-full z-[-10] " />
 

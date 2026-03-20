@@ -14,6 +14,13 @@ connectDB();
 
 app.use("/api/dashboard", require("./Backend/routes/routes"));
 
+// Endpoint to provide configuration data to the frontend
+app.get('/config', (req, res) => {
+  const DocAss_server_url = process.env.DOC_API_URL;
+  res.setHeader("Content-Type", "application/json");
+  res.json({ DocAss_server_url });
+});
+
 app.use(express.static(path.join(__dirname, "client", "dist")));
 
 app.get("/{*any}", (req, res) => {
