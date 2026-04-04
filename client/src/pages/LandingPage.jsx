@@ -267,10 +267,7 @@ export default function LandingPage() {
             Video
           </h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-            tempora, velit quia temporibus officiis fugiat quo nesciunt mollitia
-            earum, tempore, porro doloribus consectetur dolore quisquam? Ratione
-            natus iusto harum unde.
+            
           </p>
         </div>
       </section>
@@ -550,10 +547,7 @@ export default function LandingPage() {
 
       <section className="flex justify-center py-15 px-6 sm:p-20 w-screen flex-col gap-8 items-center bg-[#FEFFD8] pb-12 pt-12">
         <p className="text-center w-full sm:w-[70%] font-bold">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-          reprehenderit fugiat reiciendis officiis iusto sed quia minus ab amet
-          voluptate? Minus totam exercitationem error nemo. Aspernatur modi
-          accusamus omnis quo!
+          
         </p>
         <div className="flex gap-6 justify-center">
           <Link
