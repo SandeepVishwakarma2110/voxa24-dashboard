@@ -267,7 +267,7 @@ export default function LandingPage() {
             Video
           </h1>
           <p>
-            
+            Engage smarter on WhatsApp. Voxa24 automates client conversations, maintains records, and ensures nothing slips through the cracks.
           </p>
         </div>
       </section>
