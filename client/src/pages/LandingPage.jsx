@@ -255,7 +255,7 @@ export default function LandingPage() {
       <section className="flex justify-center flex-col sm:flex-row gap-10 py-15 px-6 sm:p-20 items-center w-screen bg-[#FFEBF3] pt-12 pb-12">
         <div className="w-full sm:w-[50%] flex justify-center items-center">
           <video
-            src="/LandingPage/section3Video/section3Video.mp4"
+            src="/LandingPage/section3Video/section3Video_new.mp4"
             controls
             className="w-full sm:w-[600px] h-auto"
           />
