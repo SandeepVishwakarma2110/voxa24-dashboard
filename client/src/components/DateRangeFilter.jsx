@@ -13,15 +13,23 @@ const DateRangeFilter = ({ onApply }) => {
   ]);
   const [showPicker, setShowPicker] = useState(false);
 
-  const handleApply = () => {
-    onApply(range[0]);
-    setShowPicker(false);
-  };
+ const handleApply = () => {
+
+  const start = range[0].startDate.toISOString().split("T")[0];
+  const end = range[0].endDate.toISOString().split("T")[0];
+
+  onApply({
+    startDate: start,
+    endDate: end
+  });
+
+  setShowPicker(false);
+};
 
   return (
     <div   >
       <button 
-        className="bg-[#2276B6] text-white px-4 py-2 rounded-lg hover:scale-105 smooth-transition"
+        className="bg-[#e9df8e] text-gray-800 px-4 py-2 rounded-lg hover:scale-105 smooth-transition"
         onClick={() => setShowPicker((prev) => !prev)}
       >
         Select Date Range

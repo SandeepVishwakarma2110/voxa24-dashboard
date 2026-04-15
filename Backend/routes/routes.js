@@ -8,14 +8,20 @@ const { getRecentLogs } = require("../controllers/controller");
 const { getAllLogsByUser } = require("../controllers/controller");
 const { getLogsByRange } = require("../controllers/controller");
 const { getLogs } = require("../controllers/controller");
-const { login } = require("../controllers/authController");
-router.post("/login", login);
 
-router.get("/logs", getLogs);
-router.get("/logs/range", getLogsByRange);
-router.get("/logs/:id", getLogById);
-router.get("/stats", getStats);
-router.get("/recent", getRecentLogs);
-router.get("/logs/user/:whatsappNumber", getAllLogsByUser);
+const { login, signup } = require("../controllers/authController");
+const authenticateToken = require("../middleware/auth");
+
+router.post("/login", login);
+router.post("/signup", signup);
+
+
+// Protected routes
+router.get("/logs", authenticateToken, getLogs);
+router.get("/logs/range", authenticateToken, getLogsByRange);
+router.get("/logs/:id", authenticateToken, getLogById);
+router.get("/stats", authenticateToken, getStats);
+router.get("/recent", authenticateToken, getRecentLogs);
+router.get("/logs/user/:whatsappNumber", authenticateToken, getAllLogsByUser);
  
 module.exports = router;

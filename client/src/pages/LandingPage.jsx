@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa6";
 import Header from "../components/Headers";
 import Footer from "../components/Footer";
+ 
 function DiffSpan({ data }) {
   return (
     <>
@@ -74,11 +75,11 @@ export default function LandingPage() {
     {
       title: "Prediction & Forcasting",
       img: "/LandingPage/section4TotalControl/four.png",
-      points: [
-        "Leverage AI-powered insights to predict customer behavior and demand.",
-        "Make smarter decisions with real-time forecasting and data-driven analytics.",
-        "Anticipate trends and optimize performance before challenges arise.",
-      ],
+     points: [
+      "Leverage AI-powered insights to predict customer behavior and demand.",
+      "Make smarter decisions with real-time forecasting and data-driven analytics.",
+      "Anticipate trends and optimize performance before challenges arise.",
+    ],
     },
   ];
 
@@ -137,58 +138,45 @@ export default function LandingPage() {
       }
     }
   }
-  //const [docAssServerUrl, setDocAssServerUrl] = useState("");
+  const [docAssServerUrl, setDocAssServerUrl] = useState("");
 
 
-  // useEffect(() => {
-  //   fetch("/config")
-
-  //     .then((res) => {
-  //       if (!res.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((text) => {
-  //       try {
-  //         const data = JSON.parse(text);
-  //        if (data.DocAss_server_url) {
-  //         localStorage.setItem("DocAss_server_url", data.DocAss_server_url);
-  //         // console.log("✅ DocAss server URL stored:", data.DocAss_server_url);
-  //       } 
-  //         setDocAssServerUrl(data.DocAss_server_url || "");
-  //         // console.log("Fetched DOC_API_URL from server:", data.DocAss_server_url);
-  //       } catch (e) {
-  //         console.error("Failed to parse JSON from /config:", text);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.error("Fetch error for /config:", err);
-  //     });
-  // }, []);
   useEffect(() => {
     fetch("/config")
+    
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }
-        return res.json(); // ✅ FIX
+        return res.text();
       })
-      .then((data) => {
-        if (data.DocAss_server_url) {
+      .then((text) => {
+        try {
+          const data = JSON.parse(text);
+         if (data.DocAss_server_url) {
           localStorage.setItem("DocAss_server_url", data.DocAss_server_url);
+          // console.log("✅ DocAss server URL stored:", data.DocAss_server_url);
+        } 
+          setDocAssServerUrl(data.DocAss_server_url || "");
+          // console.log("Fetched DOC_API_URL from server:", data.DocAss_server_url);
+        } catch (e) {
+          console.error("Failed to parse JSON from /config:", text);
         }
-        //setDocAssServerUrl(data.DocAss_server_url || "");
       })
       .catch((err) => {
         console.error("Fetch error for /config:", err);
       });
   }, []);
 
-
   return (
     <>
-      <Header />
+     <Header />
+      {/* Display the config value at the top for demo/testing */}
+      {/* {docAssServerUrl && (
+        <div style={{ background: '#e0f7fa', color: '#006064', padding: '8px', textAlign: 'center' }}>
+          DOC_API_URL: {docAssServerUrl}
+        </div>
+      )} */}
       <section className=" min-h-screen w-screen flex flex-col sm:flex-row gap-10 justify-center items-center p-6 sm:p-24">
         <div className="absolute inset-0 bg-[url('/LandingPage/section1/bg.png')]  bg-cover bg-center opacity-40 h-full w-full z-[-10] " />
 
@@ -233,8 +221,8 @@ export default function LandingPage() {
         <div className="flex flex-col sm:flex-row gap-6 justify-center ">
           {section2CostingYorRevenue.map((ele, index) => {
             return (
-              <div
-                key={index}
+                <div
+                  key={ele.title}
                 className="flex flex-col relative p-8 pt-[50px] rounded-lg w-full items-center gap-1 text-center mt-[50px]"
                 style={{ backgroundColor: `${ele.backColor}67` }}
               >
@@ -252,10 +240,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="flex justify-center flex-col sm:flex-row gap-10 py-15 px-6 sm:p-20 items-center w-screen bg-[#FFEBF3] pt-12 pb-12">
+      {/* <section className="flex justify-center flex-col sm:flex-row gap-10 py-15 px-6 sm:p-20 items-center w-screen bg-[#FFEBF3] pt-12 pb-12">
         <div className="w-full sm:w-[50%] flex justify-center items-center">
           <video
-            src="/LandingPage/section3Video/section3Video_new.mp4"
+            src="/LandingPage/section3Video/section3Video.mp4"
             controls
             className="w-full sm:w-[600px] h-auto"
           />
@@ -267,10 +255,34 @@ export default function LandingPage() {
             Video
           </h1>
           <p>
-            Engage smarter on WhatsApp. Voxa24 automates client conversations, maintains records, and ensures nothing slips through the cracks.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+            tempora, velit quia temporibus officiis fugiat quo nesciunt mollitia
+            earum, tempore, porro doloribus consectetur dolore quisquam? Ratione
+            natus iusto harum unde.
           </p>
         </div>
-      </section>
+      </section> */}
+
+  <section className="flex justify-center flex-col sm:flex-row gap-10 py-15 px-6 sm:p-20 items-center w-screen bg-[#FFEBF3] pt-12 pb-12">
+  <div className="w-full sm:w-[50%] flex justify-center items-center">
+    <iframe
+      src="https://www.youtube.com/embed/4LhyRydDXV4"
+      title="Section Video"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      className="w-full sm:w-[600px] h-[340px]"
+    />
+  </div>
+
+  <div className="w-full sm:w-[50%] sm:p-20">
+    <h1 className="font-bold text-2xl border-b-4 border-white pb-4 w-fit mb-4">
+      Video
+    </h1>
+    <p>
+      Engage smarter on WhatsApp. Voxa24 automates client conversations, maintains records, and ensures nothing slips through the cracks.
+    </p>
+  </div>
+</section>
 
       <section className="relative flex justify-center flex-col gap-24 py-15 px-6 sm:p-20 items-center w-screen pt-12 pb-12">
         <img
@@ -291,7 +303,7 @@ export default function LandingPage() {
         <div className="flex flex-col sm:flex-row flex-wrap w-full sm:w-[80vw] gap-12 justify-around">
           {section4TotalControl.map((ele) => {
             return (
-              <div className="rounded-md overflow-hidden w-full sm:w-[40%] flex shadow-xl shadow-black flex-col sm:flex-row">
+              <div className="rounded-md overflow-hidden w-full sm:w-[40%] flex shadow-xl shadow-black flex-col sm:flex-row" key={ele.title}>
                 <div className="w-full sm:w-[50%] relative">
                   <img src={ele.img} className="w-full h-full object-cover" />
                   <div
@@ -302,8 +314,8 @@ export default function LandingPage() {
                 <div className="flex flex-col gap-6 w-full sm:w-[50%] p-6 bg-white">
                   <h3 className="text-2xl font-bold">{ele.title}</h3>
                   <ul className="flex flex-col gap-3 list-[circle] marker:text-yellow-400 marker:text-xl pl-5 text-xs">
-                    {ele.points.map((p) => {
-                      return <li>{p}</li>;
+                    {ele.points.map((p, idx) => {
+                      return <li key={idx}>{p}</li>;
                     })}
                   </ul>
                 </div>
@@ -546,9 +558,12 @@ export default function LandingPage() {
       </section>
 
       <section className="flex justify-center py-15 px-6 sm:p-20 w-screen flex-col gap-8 items-center bg-[#FEFFD8] pb-12 pt-12">
-        <p className="text-center w-full sm:w-[70%] font-bold">
-          
-        </p>
+        {/* <p className="text-center w-full sm:w-[70%] font-bold">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
+          reprehenderit fugiat reiciendis officiis iusto sed quia minus ab amet
+          voluptate? Minus totam exercitationem error nemo. Aspernatur modi
+          accusamus omnis quo!
+        </p> */}
         <div className="flex gap-6 justify-center">
           <Link
             to={""}

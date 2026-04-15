@@ -24,8 +24,11 @@ export default function Login() {
         setErrors(data.message || "Login failed");
       } else {
         setErrors("");
-        alert("Login Success");
-        // Optionally redirect or save user info here
+        // Store JWT token in localStorage
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+        }
+         
         navigate("/dashboard");
       }
     } catch (err) {

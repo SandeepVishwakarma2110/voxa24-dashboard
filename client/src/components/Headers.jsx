@@ -2,10 +2,13 @@
 // import { GiHamburgerMenu } from "react-icons/gi";
 // import { RxCross2 } from "react-icons/rx";
 // import { useState } from "react";
+// import Chat from "../pages/Chat";
 
 // export default function Header() {
 //   const [menuOpen, setMenuOpen] = useState(false);
+//   const [chatOpen, setChatOpen] = useState(false);
 //   return (
+//     <>
 //     <div className="bg-blue-900 py-2 px-2 sm:px-8 flex justify-between items-center">
 //       <Link to={"/"} className="flex gap-2 items-center">
 //         <img src="logo.png" alt="" className="h-[50px] " />
@@ -25,14 +28,20 @@
 //           Link1
 //         </Link> */}
 //       </div>
-
+// <div className="gap-3"> 
 //       <Link
 //         to={"/login"}
 //         className="text-white  hover:underline bg-gradient-to-b from-[#F57B6F] to-[#FEACA3] rounded-md py-2 px-6 mr-4"
 //       >
 //         Client Login
 //       </Link>
-
+//       <Link
+//             onClick={() => setChatOpen((prev) => !prev)}
+//             className="text-white  hover:underline bg-gradient-to-b from-[#6ff571] to-[#a3fea8] rounded-md py-2 px-6 mr-4 w-fit"
+//           >
+//             Chat
+//           </Link>
+// </div>
 //       {!menuOpen ? (
 //         <GiHamburgerMenu
 //           className="hidden text-white text-3xl"
@@ -63,19 +72,32 @@
 //           >
 //             Client Login
 //           </Link>
+//           <Link
+//             to={"/chat"}
+//             className="text-white  hover:underline bg-gradient-to-b from-[#6ff571] to-[#a3fea8] rounded-md py-2 px-6 mr-4 w-fit"
+//           >
+//             Chat
+//           </Link>
 //         </div>
 //       )}
 //     </div>
+//     <Chat isOpen={chatOpen} onClose={() => setChatOpen(false)} />
+//     </>
 //   );
 // }
-
-
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Chat from "../pages/Chat.jsx";
+import Chat from "../pages/Chat";
 
 export default function Header() {
   const [chatOpen, setChatOpen] = useState(false);
+  // const navigate = useNavigate();
+  // const isAuthenticated = !!localStorage.getItem("token");
+
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   navigate("/login");
+  // };
 
   return (
     <>

@@ -70,19 +70,26 @@ exports.getRecentLogs = async (req, res) => {
 exports.getLogsByRange = async (req, res) => {
   try {
 
-    const days = parseInt(req.query.days) || 7;
+    const { startDate, endDate } = req.query;
 
-    const startDate = new Date();
+    const start = new Date(startDate);
+    const end = new Date(endDate);
 
-    startDate.setDate(startDate.getDate() - days);
+    // Force start of day
+    start.setHours(0, 0, 0, 0);
+
+    // Force end of day
+    end.setHours(23, 59, 59, 999);
 
     const logs = await Log.find({
-      startTime: { $gte: startDate }
-    }).sort({ startTime: -1 });
+      startTime: {
+        $gte: start,
+        $lte: end
+      }
+    }).sort({ startTime: 1 });
 
     res.json({
       success: true,
-      days,
       count: logs.length,
       data: logs
     });
@@ -154,3 +161,5 @@ exports.getLogs = async (req, res) => {
     });
   }
 };
+
+ 

@@ -176,40 +176,48 @@ import {
 const Charts = ({ calls }) => {
 
   // Calls Over Time
-  const callsOverTimeData = useMemo(() => {
+ const callsOverTimeData = useMemo(() => {
 
-    if (!Array.isArray(calls) || calls.length === 0) return [];
+  if (!Array.isArray(calls) || calls.length === 0) return [];
 
-    const callsByDate = calls.reduce((acc, call) => {
+  const callsByDate = calls.reduce((acc, call) => {
 
-      if (!call.startedAt) return acc;
+    if (!call.startedAt) return acc;
 
-      try {
+    const date = new Date(call.startedAt);
+    const dateStr = date.toISOString().split("T")[0];
 
-        const date = new Date(call.startedAt);
+    acc[dateStr] = (acc[dateStr] || 0) + 1;
 
-        // same logic as table (local date)
-        const dateStr = date.toLocaleDateString('en-IN');
+    return acc;
 
-        acc[dateStr] = (acc[dateStr] || 0) + 1;
+  }, {});
 
-      } catch (err) {
-        console.error("Date parse error:", call.startedAt);
-      }
+  const dates = Object.keys(callsByDate).sort();
 
-      return acc;
+  const start = new Date(dates[0]);
+  const end = new Date(dates[dates.length - 1]);
 
-    }, {});
+  const result = [];
 
-    return Object.entries(callsByDate)
-      .map(([date, count]) => ({
-        date,
-        count
-      }))
-      .sort((a, b) => new Date(a.date) - new Date(b.date));
+  for (
+    let d = new Date(start);
+    d <= end;
+    d.setDate(d.getDate() + 1)
+  ) {
 
-  }, [calls]);
+    const dateStr = d.toISOString().split("T")[0];
 
+    result.push({
+      date: dateStr,
+      count: callsByDate[dateStr] || 0
+    });
+
+  }
+
+  return result;
+
+}, [calls]);
 
 
   // Tooltip UI (same design)
@@ -220,7 +228,7 @@ const Charts = ({ calls }) => {
       return (
         <div className="bg-white p-2 rounded shadow-lg   ">
 
-          <p className="label text-gray-800 text-sm">{label}</p>
+          <p className="label text-gray-800 text-sm"> {new Date(label).toLocaleDateString("en-GB")}</p>
 
           <p className="intro text-[#FF3E9B] font-medium">
             Calls: {payload[0].value}
@@ -273,7 +281,7 @@ const Charts = ({ calls }) => {
                 dataKey="date"
                 stroke="#a1a1c0"
                 fontSize={12}
-                tickFormatter={(tick) => tick}
+                tickFormatter={(tick) => new Date(tick).toLocaleDateString("en-GB")}
               />
 
               <YAxis

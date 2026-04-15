@@ -7,6 +7,8 @@ import Footer from "./components/Footer";
 import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
 import DashboardPage from "./pages/DashboardPage";
+import Chat from "./pages/Chat";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function Layout() {
   return (
@@ -25,7 +27,8 @@ function App() {
       children: [
         { path: "/", element: <LandingPage /> },
         { path: "/login", element: <Login /> },
-        { path: "/dashboard", element: <DashboardPage /> },
+        { path: "/dashboard", element: <ProtectedRoute><DashboardPage /></ProtectedRoute> },
+        { path: "/chat", element: <ProtectedRoute><Chat /></ProtectedRoute> },
       ],
     },
   ]);
